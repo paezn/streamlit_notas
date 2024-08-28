@@ -20,6 +20,10 @@ df_notas_media = pd.read_csv('https://raw.githubusercontent.com/paezn/streamlit_
 df_notas_basica = df_notas_basica.astype({'codigo':'str'})
 st.write(df_notas_basica.dtypes)
 
+####################################
+## Creacion sidebar y filtros
+####################################
+
 # Crear sidebar y poner imagen
 st.sidebar.image('escudoGuanenta.png',)
 
@@ -45,7 +49,7 @@ grupos = grupos1 + grupos2
 grupos = st.sidebar.multiselect('Grupo', grupos)
 
 # lista asignaturas
-asignaturas_basica = list(df_notas_basica.columns.values)
-asignaturas = st.sidebar.multiselect('Asignaturas', asignaturas_basica)
-
+asignaturas = ['Biología','Sociales', 'Cátedra Paz', 'Artística', 'Etica', 'Religión','Educación Física', 'Castellano', 'Inglés', 'Matemáticas', 'Geometría','Estadística', 'Tecnología', 'Informática', 'Dibujo Técnico', 'Filosofía','Física', 'Química','Ciencias Políticas']
+asignaturas = sorted(asignaturas)
+asignaturas = st.sidebar.multiselect('Asignaturas', asignaturas)
 
