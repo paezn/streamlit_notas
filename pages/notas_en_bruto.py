@@ -39,26 +39,26 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     # Numero de estudiantes total
-    st.metric('Número estudiantes', df_notas_basica.shape[0])
+    st.metric(':red[Número estudiantes]', df_notas_basica.shape[0])
     # Número estudiantes jornada mañana
-    st.metric('Número estudiantes J. Mañana', df_notas_basica[df_notas_basica['jornada'] == 'Mañana'].shape[0])
+    st.metric(':red[Número estudiantes J. Mañana]', df_notas_basica[df_notas_basica['jornada'] == 'Mañana'].shape[0])
     # Número estudiantes jornada mañana
-    st.metric('Número estudiantes J. Tarde', df_notas_basica[df_notas_basica['jornada'] == 'Tarde'].shape[0])
+    st.metric(':red[Número estudiantes J. Tarde]', df_notas_basica[df_notas_basica['jornada'] == 'Tarde'].shape[0])
 with col2:
     # promedio general basica
-    st.metric('Promedio general',math.trunc(df_notas_basica['promedio'].mean()),delta_color="normal")
+    st.metric(':orange[Promedio general]',math.trunc(df_notas_basica['promedio'].mean()),delta_color="normal")
     # promedio general basica j. mañana
-    st.metric('Promedio general J. Mañana',math.trunc(df_notas_basica[df_notas_basica['jornada'] == 'Mañana']['promedio'].mean()),delta_color="normal")
+    st.metric(':orange[Promedio general J. Mañana]',math.trunc(df_notas_basica[df_notas_basica['jornada'] == 'Mañana']['promedio'].mean()),delta_color="normal")
     # promedio general basica j. tarde
-    st.metric('Promedio general J. Tarde',math.trunc(df_notas_basica[df_notas_basica['jornada'] == 'Tarde']['promedio'].mean()),delta_color="normal")
+    st.metric(':orange[Promedio general J. Tarde]',math.trunc(df_notas_basica[df_notas_basica['jornada'] == 'Tarde']['promedio'].mean()),delta_color="normal")
 
 with col3:
     # promedio general basica
-    st.metric('Desviación estándar',math.trunc(df_notas_basica['promedio'].std()),delta_color="normal")
+    st.metric(':violet[Desviación estándar]',math.trunc(df_notas_basica['promedio'].std()),delta_color="normal")
     # Desviacion estandar j. mañana
-    st.metric('Desviación estándar J. Mañana',math.trunc(df_notas_basica[df_notas_basica['jornada'] == 'Mañana']['promedio'].std()),delta_color="inverse")
+    st.metric(':violet[Desviación estándar J. Mañana]',math.trunc(df_notas_basica[df_notas_basica['jornada'] == 'Mañana']['promedio'].std()),delta_color="inverse")
     # Desviación estándar j. tarde
-    st.metric('Desviación estándar J. Tarde',math.trunc(df_notas_basica[df_notas_basica['jornada'] == 'Tarde']['promedio'].std()),delta_color="normal")
+    st.metric(':violet[Desviación estándar J. Tarde]',math.trunc(df_notas_basica[df_notas_basica['jornada'] == 'Tarde']['promedio'].std()),delta_color="normal")
 
 st.dataframe(df_notas_basica)
 
