@@ -124,7 +124,13 @@ with tab1:
     with col1:
         # Top 5 asignaturas con mas alto promedio nivel media
         df_asignaturas = df_notas_media[df_notas_media.columns[7:]]
-        lista_asignaturas = list(df_notas_media.columns[7:])
+        # Lista de asignaturas
+        lista_asignaturas = list(df_asignaturas.columns[:])
+        lista_asignaturas.remove('area_sociales')
+        lista_asignaturas.remove('area_naturales')
+        lista_asignaturas.remove('area_matematicas')
+        lista_asignaturas.remove('comportamiento')
+        #st.write(lista_asignaturas)
         df_promedio_asignaturas = df_asignaturas[lista_asignaturas].mean()
         df_promedio_asignaturas = pd.DataFrame(df_promedio_asignaturas)
         df_promedio_asignaturas.reset_index(inplace=True)
@@ -133,13 +139,14 @@ with tab1:
         df_promedio_asignaturas['promedio'] = df_promedio_asignaturas['promedio'].astype(int)
         #grafica barras
         fig_top_asig_media_promedio = px.bar(df_promedio_asignaturas.head(), x='asignatura', y = 'promedio', text_auto=True, title='Top  asignaturas mejor promedio nivel media')
+        fig_top_asig_media_promedio.update_traces(marker_color = 'green', marker_line_color = 'black',marker_line_width = 2, opacity = 1)
         st.plotly_chart(fig_top_asig_media_promedio, use_container_width = True)
 
-        # Top 5 asignaturas con mas alto promedio nivel media
+        # Top 5 asignaturas con mas bajo promedio nivel media
         df_promedio_asignaturas = df_promedio_asignaturas.sort_values('promedio', ascending=True)
         df_promedio_asignaturas['promedio'] = df_promedio_asignaturas['promedio'].astype(int)
         #grafica barras
-        fig_top_asig_media_promedio = px.bar(df_promedio_asignaturas.head(), x='asignatura', y = 'promedio', text_auto=True, title='Top  asignaturas peor promedio nivel media')
+        fig_top_asig_media_promedio = px.bar(df_promedio_asignaturas.head(), x='asignatura', y = 'promedio', color='asignatura',text_auto=True, title='Top  asignaturas peor promedio nivel media')
         st.plotly_chart(fig_top_asig_media_promedio, use_container_width = True)
         
 
@@ -147,6 +154,12 @@ with tab1:
          # Top 5 asignaturas con mas alto promedio nivel basica
         df_asignaturas = df_notas_basica[df_notas_basica.columns[6:26]]
         lista_asignaturas = list(df_notas_basica.columns[7:])
+        lista_asignaturas.remove('area_sociales')
+        lista_asignaturas.remove('area_matematicas')
+        lista_asignaturas.remove('area_tecnologia')
+        lista_asignaturas.remove('comportamiento')
+        lista_asignaturas.remove('areas_reprobadas')
+        # st.write(lista_asignaturas)
         df_promedio_asignaturas = df_asignaturas[lista_asignaturas].mean()
         df_promedio_asignaturas = pd.DataFrame(df_promedio_asignaturas)
         df_promedio_asignaturas.reset_index(inplace=True)
@@ -155,23 +168,30 @@ with tab1:
         df_promedio_asignaturas['promedio'] = df_promedio_asignaturas['promedio'].astype(int)
         #grafica barras
         fig_top_asig_basica_promedio = px.bar(df_promedio_asignaturas.head(), x='asignatura', y = 'promedio', text_auto=True, title='Top  asignaturas mejor promedio nivel basica')
+        fig_top_asig_basica_promedio.update_traces(marker_color = 'orange', marker_line_color = 'black',marker_line_width = 2, opacity = 1)
         st.plotly_chart(fig_top_asig_basica_promedio, use_container_width = True)
 
-        # Top 5 asignaturas con mas alto promedio nivel media
+        # Top 5 asignaturas con mas bajo promedio nivel basica
         df_promedio_asignaturas = df_promedio_asignaturas.sort_values('promedio', ascending=True)
         df_promedio_asignaturas['promedio'] = df_promedio_asignaturas['promedio'].astype(int)
         #grafica barras
-        fig_top_asig_basica_promedio = px.bar(df_promedio_asignaturas.head(), x='asignatura', y = 'promedio', text_auto=True, title='Top  asignaturas peor promedio nivel basica')
+        fig_top_asig_basica_promedio = px.bar(df_promedio_asignaturas.head(), x='asignatura', y = 'promedio', color='asignatura', text_auto=True, title='Top  asignaturas peor promedio nivel basica')
         st.plotly_chart(fig_top_asig_basica_promedio, use_container_width = True)
 
 with tab2:
     # graficas estudiantes
-    col1, col2 = st.columns(2)
+    #col1, col2 = st.columns(2)
 
-    with col1:
+   # with col1:
         # Top 5 estudiantes con mas alto promedio
-        pass
-    with col2:
+        df_estudiantes_alto_promedio = df_notas_media.groupby(['grupo', 'nombre'])[['promedio']].mean().sort_values('promedio', ascending=False)
+        df_estudiantes_alto_promedio.reset_index(inplace=True)
+        df_estudiantes_alto_promedio.head(10)
+        # st.dataframe(df_estudiantes_alto_promedio.head(10))
+        fig_top_estudiantes_media_promedio = px.bar(df_estudiantes_alto_promedio.head(10), x = 'nombre', y = 'promedio', color='grupo',   orientation='v', hover_data=['grupo'], text_auto=True, title = 'Top estudiantes mejor promedo nivel media')
+        #fig_top_estudiantes_media_promedio.update_traces(marker_color = 'green', marker_line_color = 'black',marker_line_width = 2, opacity = 1)
+        st.plotly_chart(fig_top_estudiantes_media_promedio)
+   # with col2:
         # Top 5 estudiantes con mas materias reprobadas
         pass
 
