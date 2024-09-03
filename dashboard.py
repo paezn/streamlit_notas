@@ -56,27 +56,33 @@ if niveles == 'Todos':
     df_notas_basica = pd.read_csv('https://raw.githubusercontent.com/paezn/streamlit_notas/main/notas_periodo_II_basica_secundaria.csv')
     
     # crear dataframe con notas de nivel media, alojados en github
-    df_notas_media = pd.read_csv('https://raw.githubusercontent.com/paezn/streamlit_notas/main/notas_periodo_II_media_tecnica.csv')
+    #df_notas_media = pd.read_csv('https://raw.githubusercontent.com/paezn/streamlit_notas/main/notas_periodo_II_media_tecnica.csv')
+
+    # crear dataframe con notas de nivel media, guardados localmente en esta carpeta
+    df_notas_media = pd.read_csv('notas_periodo_II_media_tecnica.csv')
+    df_notas_media = df_notas_media.astype({'grupo':'str'})
 
     # limpieza de los dataframes
-    df_notas_basica = df_notas_basica.astype({'codigo':'str'})
-    df_notas_basica.set_index('codigo', inplace=True)
+    #df_notas_basica = df_notas_basica.astype({'codigo':'str'})
+    #df_notas_basica.set_index('codigo', inplace=True)
 
-    df_notas_media = df_notas_media.astype({'codigo':'str'})
-    df_notas_media.set_index('codigo', inplace=True)
+    #df_notas_media = df_notas_media.astype({'codigo':'str'})
+    #df_notas_media.set_index('codigo', inplace=True)
 
 elif niveles == 'Básica':
     # crear dataframe con notas de nivel basica, alojados en github
-    df_notas_basica = pd.read_csv('https://raw.githubusercontent.com/paezn/streamlit_notas/main/notas_periodo_II_basica_secundaria.csv')
+    #df_notas_basica = pd.read_csv('https://raw.githubusercontent.com/paezn/streamlit_notas/main/notas_periodo_II_basica_secundaria.csv')
     # limpieza de los dataframes
-    df_notas_basica = df_notas_basica.astype({'codigo':'str'})
-    df_notas_basica.set_index('codigo', inplace=True)
+   # df_notas_basica = df_notas_basica.astype({'codigo':'str'})
+    #df_notas_basica.set_index('codigo', inplace=True)
+    pass
 else:
     # crear dataframe con notas de nivel media, alojados en github
-    df_notas_media = pd.read_csv('https://raw.githubusercontent.com/paezn/streamlit_notas/main/notas_periodo_II_media_tecnica.csv')
+    #df_notas_media = pd.read_csv('https://raw.githubusercontent.com/paezn/streamlit_notas/main/notas_periodo_II_media_tecnica.csv')
     # limpieza de los dataframes
-    df_notas_media = df_notas_media.astype({'codigo':'str'})
-    df_notas_media.set_index('codigo', inplace=True)
+    #df_notas_media = df_notas_media.astype({'codigo':'str'})
+    #df_notas_media.set_index('codigo', inplace=True)
+    pass
 
 
 # Jornada
@@ -100,6 +106,8 @@ if grados:
         if (i.split('-')[0] in grados):
             lista_grupos_media.append(i)
     df_notas_media = df_notas_media[df_notas_media['grupo'].isin(lista_grupos_media)]
+    
+    #df_notas_media['grupo'] = df_notas_media['grupo'].astype(str)
     #st.dataframe(df_notas_media)
 
 
@@ -146,6 +154,7 @@ with tab3:
         st.dataframe(top_grupos_basica_promedio)
         st.write(top_grupos_basica_promedio.dtypes)
 
+    with col2:
         # Top 5 grupos con mas alto promedio nivel media
         top_grupos_media_promedio = df_notas_media.groupby('grupo')[['promedio']].mean().sort_values('promedio', ascending=False)
         top_grupos_media_promedio.reset_index(inplace=True)
@@ -154,7 +163,6 @@ with tab3:
         st.plotly_chart(fig_top_grupos_media_promedio, use_container_width = True)
         st.dataframe(top_grupos_media_promedio)
         st.write(top_grupos_media_promedio.dtypes)
-    
-    with col2:
+        
         # Top 5 grupos con mas mortalidad
         pass

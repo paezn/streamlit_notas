@@ -26,6 +26,7 @@ df_notas_basica = df_notas_basica.sort_values('grupo',ascending=True)
 df_notas_media = df_notas_media.drop(columns=['periodo'])
 df_notas_media = df_notas_media.astype({'codigo':'str'})
 df_notas_media.set_index('codigo', inplace=True)
+df_notas_media = df_notas_media.sort_values('grupo', ascending=True)
 
 # Crear sidebar y poner imagen
 st.sidebar.image('escudoGuanenta.png')
