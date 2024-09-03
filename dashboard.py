@@ -8,6 +8,7 @@ warnings.filterwarnings('ignore')
 st.header(':blue[Colegio San José de Guanentá]:school:')
 st.code("Especialidad en Sistemas", language="python")
 st.title(':green[Dashboard Academy]')
+st.header(':blue[Notas Periodo II 2024]')
 
 
 # creación de dataframes vacios
@@ -124,7 +125,7 @@ with tab1:
     with col1:
         # Top 5 asignaturas con mas alto promedio nivel media
         df_asignaturas = df_notas_media[df_notas_media.columns[7:]]
-        # Lista de asignaturas
+        # Lista de asignaturas, eliminar areas
         lista_asignaturas = list(df_asignaturas.columns[:])
         lista_asignaturas.remove('area_sociales')
         lista_asignaturas.remove('area_naturales')
@@ -183,14 +184,26 @@ with tab2:
     #col1, col2 = st.columns(2)
 
    # with col1:
-        # Top 5 estudiantes con mas alto promedio
+        # Top 5 estudiantes con mas alto promedio nivel media
         df_estudiantes_alto_promedio = df_notas_media.groupby(['grupo', 'nombre'])[['promedio']].mean().sort_values('promedio', ascending=False)
         df_estudiantes_alto_promedio.reset_index(inplace=True)
         df_estudiantes_alto_promedio.head(10)
         # st.dataframe(df_estudiantes_alto_promedio.head(10))
-        fig_top_estudiantes_media_promedio = px.bar(df_estudiantes_alto_promedio.head(10), x = 'nombre', y = 'promedio', color='grupo',   orientation='v', hover_data=['grupo'], text_auto=True, title = 'Top estudiantes mejor promedo nivel media')
+        fig_top_estudiantes_media_promedio = px.bar(df_estudiantes_alto_promedio.head(10), x = 'nombre', y = 'promedio'  , color = 'grupo',hover_data='grupo' ,orientation='v', text_auto=True, title = 'Top estudiantes mejor promedo nivel media')
+        fig_top_estudiantes_media_promedio.update_layout(xaxis={'categoryorder':'total descending'})
         #fig_top_estudiantes_media_promedio.update_traces(marker_color = 'green', marker_line_color = 'black',marker_line_width = 2, opacity = 1)
         st.plotly_chart(fig_top_estudiantes_media_promedio)
+
+        # Top 5 estudiantes con mas alto promedio nivel basica
+        # st.dataframe(df_notas_basica)
+        df_estudiantes_alto_promedio_basica = df_notas_basica.groupby(['grupo', 'Nombre'])[['promedio']].mean().sort_values('promedio', ascending=False)
+        df_estudiantes_alto_promedio_basica.reset_index(inplace=True)
+        df_estudiantes_alto_promedio_basica.head(10)
+        # st.dataframe(df_estudiantes_alto_promedio_basica.head(10))
+        fig_top_estudiantes_basica_promedio = px.bar(df_estudiantes_alto_promedio_basica.head(10), x = 'Nombre', y = 'promedio'  , color = 'grupo',hover_data='grupo' ,orientation='v', text_auto=True, title = 'Top estudiantes mejor promedo nivel basica')
+        fig_top_estudiantes_basica_promedio.update_layout(xaxis={'categoryorder':'total descending'})
+        #fig_top_estudiantes_media_promedio.update_traces(marker_color = 'green', marker_line_color = 'black',marker_line_width = 2, opacity = 1)
+        st.plotly_chart(fig_top_estudiantes_basica_promedio)
    # with col2:
         # Top 5 estudiantes con mas materias reprobadas
         pass
@@ -203,7 +216,7 @@ with tab3:
         # Top 5 grupos con mas alto promedio nivel básica
         top_grupos_basica_promedio = df_notas_basica.groupby('grupo')[['promedio']].mean().sort_values('promedio', ascending=False)
         top_grupos_basica_promedio.reset_index(inplace=True)
-        fig_top_grupos_basica_promedio = px.bar(top_grupos_basica_promedio.head(), x='grupo', y = 'promedio', text_auto=True, title='Top  grupos mejor promedio nivel basica')
+        fig_top_grupos_basica_promedio = px.bar(top_grupos_basica_promedio.head(), x='grupo', y = 'promedio', color = 'grupo', text_auto=True, title='Top  grupos mejor promedio nivel basica')
         st.plotly_chart(fig_top_grupos_basica_promedio, use_container_width = True)
         st.dataframe(top_grupos_basica_promedio)
         st.write(top_grupos_basica_promedio.dtypes)
