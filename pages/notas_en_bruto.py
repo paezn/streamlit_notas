@@ -30,6 +30,7 @@ df_notas_media = df_notas_media.sort_values('grupo', ascending=True)
 
 # Crear sidebar y poner imagen
 st.sidebar.image('escudoGuanenta.png')
+st.sidebar.image('logoSistemas.png')
 
 # mostrar dataframes
 st.header(':blue[Notas Periodo II 2024 - Básica Secundaria]')
@@ -72,33 +73,26 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     # Numero de estudiantes
-    st.metric('Número estudiantes', df_notas_media.shape[0])
+    st.metric(':red[Número estudiantes]', df_notas_media.shape[0])
     # Número estudiantes jornada mañana
-    st.metric('Número estudiantes J. Mañana', df_notas_media[df_notas_media['jornada'] == 'Mañana'].shape[0])
+    st.metric(':red[Número estudiantes J. Mañana]', df_notas_media[df_notas_media['jornada'] == 'Mañana'].shape[0])
     # Número estudiantes jornada mañana
-    st.metric('Número estudiantes J. Tarde', df_notas_media[df_notas_media['jornada'] == 'Tarde'].shape[0])
+    st.metric(':red[Número estudiantes J. Tarde]', df_notas_media[df_notas_media['jornada'] == 'Tarde'].shape[0])
 
 with col2:
     # promedio general basica
-    st.metric('Promedio general',math.trunc(df_notas_media['promedio'].mean()),delta_color="normal")
+    st.metric(':orange[Promedio general]',math.trunc(df_notas_media['promedio'].mean()),delta_color="normal")
     # promedio general basica j. mañana
-    st.metric('Promedio general J. Mañana',math.trunc(df_notas_media[df_notas_media['jornada'] == 'Mañana']['promedio'].mean()),delta_color="normal")
+    st.metric(':orange[Promedio general J. Mañana]',math.trunc(df_notas_media[df_notas_media['jornada'] == 'Mañana']['promedio'].mean()),delta_color="normal")
     # promedio general basica j. tarde
-    st.metric('Promedio general J. Tarde',math.trunc(df_notas_media[df_notas_media['jornada'] == 'Tarde']['promedio'].mean()),delta_color="normal")
+    st.metric(':orange[Promedio general J. Tarde]',math.trunc(df_notas_media[df_notas_media['jornada'] == 'Tarde']['promedio'].mean()),delta_color="normal")
 
 with col3:
     # promedio general basica
-    st.metric('Desviación estándar',math.trunc(df_notas_media['promedio'].std()),delta_color="normal")
+    st.metric(':violet[Desviación estándar]',math.trunc(df_notas_media['promedio'].std()),delta_color="normal")
     # Desviacion estandar j. mañana
-    st.metric('Desviación estándar J. Mañana',math.trunc(df_notas_media[df_notas_media['jornada'] == 'Mañana']['promedio'].std()),delta_color="inverse")
+    st.metric(':violet[Desviación estándar J. Mañana]',math.trunc(df_notas_media[df_notas_media['jornada'] == 'Mañana']['promedio'].std()),delta_color="inverse")
     # Desviación estándar j. tarde
-    st.metric('Desviación estándar J. Tarde',math.trunc(df_notas_media[df_notas_media['jornada'] == 'Tarde']['promedio'].std()),delta_color="normal")
+    st.metric(':violet[Desviación estándar J. Tarde]',math.trunc(df_notas_media[df_notas_media['jornada'] == 'Tarde']['promedio'].std()),delta_color="normal")
 
 st.dataframe(df_notas_media)
-
-
-
-
-
-
-

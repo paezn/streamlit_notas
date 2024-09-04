@@ -24,7 +24,7 @@ df_notas_media = pd.read_csv('https://raw.githubusercontent.com/paezn/streamlit_
 ## Creacion sidebar y filtros
 ####################################
 
-# Crear sidebar y poner imagen
+# Crear sidebar y poner imagen escudo colegio
 st.sidebar.image('escudoGuanenta.png')
 
 # Agregar título a sidebar
@@ -90,6 +90,8 @@ grados = st.sidebar.multiselect('Grado', grados)
     #df_notas_media.set_index('codigo', inplace=True)
     #pass
 
+# Crear sidebar y poner imagen escudo colegio
+st.sidebar.image('logoSistemas.png')
 
 # Jornada
 if jornadas:
