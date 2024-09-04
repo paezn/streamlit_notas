@@ -182,7 +182,7 @@ with tab1:
 
         # Top 5 asignaturas con mas bajo promedio nivel basica
         df_promedio_asignaturas = df_promedio_asignaturas.sort_values('promedio', ascending=True)
-        df_promedio_asignaturas['promedio'] = df_promedio_asignaturas['promedio'].astype(int)
+        # df_promedio_asignaturas['promedio'] = df_promedio_asignaturas['promedio'].astype(int)
         #grafica barras
         fig_top_asig_basica_promedio = px.bar(df_promedio_asignaturas.head(), x='asignatura', y = 'promedio', color='asignatura', text_auto=True, title='Top  5 asignaturas peor promedio nivel basica')
         st.plotly_chart(fig_top_asig_basica_promedio, use_container_width = True)
