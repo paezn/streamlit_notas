@@ -174,7 +174,7 @@ with tab1:
         df_promedio_asignaturas.reset_index(inplace=True)
         df_promedio_asignaturas.columns = ['asignatura', 'promedio']
         df_promedio_asignaturas = df_promedio_asignaturas.sort_values('promedio', ascending=False)
-        #df_promedio_asignaturas['promedio'] = df_promedio_asignaturas['promedio'].astype(int)
+        # df_promedio_asignaturas['promedio'] = df_promedio_asignaturas['promedio'].astype(int)
         #grafica barras
         fig_top_asig_basica_promedio = px.bar(df_promedio_asignaturas.head(), x='asignatura', y = 'promedio', text_auto=True, title='Top 5 asignaturas mejor promedio nivel basica')
         fig_top_asig_basica_promedio.update_traces(marker_color = 'orange', marker_line_color = 'black',marker_line_width = 2, opacity = 1)
