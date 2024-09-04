@@ -4,6 +4,7 @@ import streamlit as st
 import warnings
 
 warnings.filterwarnings('ignore')
+st.set_page_config(layout='wide')
 
 st.header(':blue[Colegio San José de Guanentá]:school:')
 st.code("Especialidad en Sistemas", language="python")

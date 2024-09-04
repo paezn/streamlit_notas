@@ -5,6 +5,7 @@ import warnings
 import math
 
 warnings.filterwarnings('ignore')
+st.set_page_config(layout='wide')
 
 st.header('Colegio San José de Guanentá:school:')
 st.code("Especialidad en Sistemas", language="python")
